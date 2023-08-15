@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
 import { BrowserModule, Title } from '@angular/platform-browser';
-import { HomeComponent } from './features/home/home.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
@@ -27,7 +25,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
-import { SnackbarService } from './services/snackbar.service';
 
 const matImports = [
   MatChipsModule,
@@ -56,7 +53,7 @@ const matImports = [
 ];
 
 @NgModule({
-  imports: [...matImports, AppRoutingModule, BrowserModule, SnackbarService],
+  imports: [...matImports, AppRoutingModule, BrowserModule],
   declarations: [AppComponent],
   providers: [Title],
   bootstrap: [AppComponent],

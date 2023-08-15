@@ -6,7 +6,9 @@ import {
 } from '@angular/material/snack-bar';
 import { ToastClassEnum } from '../enums/snackbar.enum';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class SnackbarService {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';

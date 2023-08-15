@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastClassEnum } from 'src/app/enums/snackbar.enum';
-import { TriviaCategory } from 'src/app/models/trivia.model';
-import { SnackbarService } from 'src/app/services/snackbar.service';
-import { TriviaService } from 'src/app/services/trivia.service';
+import { ToastClassEnum } from '../../enums/snackbar.enum';
+import { TriviaCategory } from '../../models/trivia.model';
+import { SnackbarService } from '../../services/snackbar.service';
+import { TriviaService } from '../../services/trivia.service';
 
 @Component({
   selector: 'app-home',

@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { TriviaCategory } from '../models/trivia.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class TriviaService {
   constructor(private http: HttpClient) {}
 

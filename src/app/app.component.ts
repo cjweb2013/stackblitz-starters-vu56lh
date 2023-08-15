@@ -10,6 +10,6 @@ export class AppComponent implements OnInit {
   constructor(private titleService: Title) {}
 
   ngOnInit() {
-    this.titleService.setTitle('Agent Portal');
+    this.titleService.setTitle('Quiz Maker');
   }
 }

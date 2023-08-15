@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -37,7 +37,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+const browserModules = [BrowserAnimationsModule, BrowserModule];
 const matImports = [
   MatChipsModule,
   MatAutocompleteModule,
@@ -72,7 +74,8 @@ const coreModules = [
 ];
 
 @NgModule({
-  imports: [...matImports, ...coreModules, AppRoutingModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  imports: [...browserModules, ...matImports, ...coreModules, AppRoutingModule],
   declarations: [AppComponent],
   providers: [
     //Mat tooltip global config

@@ -27,6 +27,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
 import { FormsModule } from '@angular/forms';
+import { SnackbarService } from './services/snackbar.service';
 
 const matImports = [
   MatChipsModule,
@@ -55,7 +56,7 @@ const matImports = [
 ];
 
 @NgModule({
-  imports: [...matImports, AppRoutingModule, BrowserModule],
+  imports: [...matImports, AppRoutingModule, BrowserModule, SnackbarService],
   declarations: [AppComponent],
   providers: [Title],
   bootstrap: [AppComponent],

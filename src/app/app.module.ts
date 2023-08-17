@@ -1,4 +1,8 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  NgModule,
+  NO_ERRORS_SCHEMA,
+} from '@angular/core';
 import { AppComponent } from './app.component';
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -38,6 +42,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './features/home/home.component';
 
 const matImports = [
   MatChipsModule,
@@ -64,9 +69,7 @@ const matImports = [
   MatButtonToggleModule,
 ];
 const coreModules = [
-  BrowserModule,
   BrowserAnimationsModule,
-  CommonModule,
   RouterModule,
   FormsModule,
   ReactiveFormsModule,
@@ -75,8 +78,14 @@ const coreModules = [
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  imports: [...matImports, ...coreModules, AppRoutingModule],
-  declarations: [AppComponent],
+  imports: [
+    ...matImports,
+    ...coreModules,
+    AppRoutingModule,
+    BrowserModule,
+    CommonModule,
+  ],
+  declarations: [AppComponent, HomeComponent],
   providers: [
     //Mat tooltip global config
     {

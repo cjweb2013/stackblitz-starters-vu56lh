@@ -2,32 +2,38 @@
   <span class="text-2xl flex font-bold my-8">Quiz Maker</span>
   <div class="flex items-center gap-x-8">
     <select
-            mat-select
-            #categorySelect
-            class="select w-40 h-10 border border-color-gray-400"
-            aria-label="Select a category"
-            name="category">
+      mat-select
+      #categorySelect
+      class="select w-40 h-10 border border-color-gray-400 rounded"
+      aria-label="Select a category"
+      name="category"
+    >
       <option disabled selected>Select a category</option>
       <option *ngFor="let category of triviaCategories" [value]="category">
         {{ category.name }}
       </option>
     </select>
-    <select mat-select
-            #difficultySelect
-            name="difficulty"
-            aria-placeholder="Select Difficulty"
-            placeholder="Select Difficulty"
-            [disabled]="!selectedCategory.id">
+    <select
+      mat-select
+      #difficultySelect
+      class="select w-40 h-10 border border-color-gray-400 rounded"
+      name="difficulty"
+      aria-placeholder="Select Difficulty"
+      placeholder="Select Difficulty"
+    >
+      <option disabled selected>Select difficulty</option>
       <option
-              *ngFor="let difficulty of difficultyLevels"
-              [value]="difficulty"></option>
+        *ngFor="let difficulty of difficultyLevels"
+        [value]="difficulty"
+      ></option>
     </select>
     <button
-            #createBtn
-            mat-button
-            class="button bg-color-gray-lighter"
-            type="button"
-            (click)="createTriviaQuestions()">
+      #createBtn
+      mat-button
+      class="button px-4 h-10 bg-color-gray-lighter hover:bg-blue-400"
+      type="button"
+      (click)="createTriviaQuestions()"
+    >
       Create
     </button>
   </div>

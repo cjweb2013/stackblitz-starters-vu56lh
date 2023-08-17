@@ -13,8 +13,8 @@ import { TriviaService } from '../../services/trivia.service';
 export class HomeComponent implements OnInit {
   difficultyLevels: string[] = ['easy', 'medium', 'hard'];
   isLoading = false;
-  selectedCategory: TriviaCategory = { id: 0, name: '' };
-  selectedDifficulty: string = '';
+  selectedCategory?: TriviaCategory;
+  selectedDifficulty?: string;
   triviaCategories: TriviaCategory[] = [];
   triviaResults?: TriviaResults;
 
@@ -26,10 +26,32 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.getTrivia();
+    let message = '';
+    let toastClass = ToastClassEnum.default;
+    this.triviaService
+      .getTriviaQuestions(10, 19, 'easy')
+      .subscribe({
+        next: (results) => {
+          this.triviaResults = results;
+          message = 'Quiz generated successfully!';
+          toastClass = ToastClassEnum.success;
+          console.log(results);
+        },
+        error: (err) => {
+          console.log('Error', err);
+          message =
+            'There was an error retrieving your questions. Please try again.';
+          toastClass = ToastClassEnum.warning;
+        },
+      })
+      .add(() => {
+        this.isLoading = false;
+        this.snackbarService.openSnackbar(message, toastClass);
+      });
   }
 
   createTriviaQuestions(): void {
-    if (this.selectedDifficulty && this.selectedCategory.id) {
+    if (this.selectedDifficulty && this.selectedCategory?.id) {
       this.isLoading = true;
       let message = '',
         toastClass = ToastClassEnum.default;

@@ -14,8 +14,9 @@
         {{ category.name }}
       </option>
     </select>
-    <select #difficultySelect name="difficulty" aria-placeholder="Select Difficulty" [disabled]="!selectedCategory">
-      <option *ngFor="let difficulty"
+    <select #difficultySelect name="difficulty" aria-placeholder="Select Difficulty" [(ngModel)]="selectedDifficulty" [disabled]="!selectedCategory">
+      <option *ngFor="let difficulty of difficultyLevels;" [value]=" difficulty"></option>
+    </select>
     <button #createBtn mat-button class="button bg-color-gray-lighter" type="button" (click)="createTrivia()">Create</button>
   </div>
 </section>

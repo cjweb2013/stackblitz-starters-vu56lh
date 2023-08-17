@@ -42,3 +42,9 @@
     </button>
   </div>
 </section>
+<section class="h-full w-full m-4 flex items-center">
+  <div class="flex flex-col w-4/5 min-w-600">
+    <app-quiz [categoryId]="selectedCategory.id" [difficulty]="selectedDifficulty" [questions]="triviaResults?.results"></app-quiz>
+
+  </div>
+</section>

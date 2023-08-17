@@ -43,6 +43,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './features/home/home.component';
+import { QuizComponent } from './features/quiz/quiz.component';
 
 const matImports = [
   MatChipsModule,
@@ -54,13 +55,11 @@ const matImports = [
   MatInputModule,
   MatMenuModule,
   MatRadioModule,
-  MatSelectModule,
   MatSidenavModule,
   MatSliderModule,
   MatSlideToggleModule,
   MatSnackBarModule,
   MatToolbarModule,
-  MatTooltipModule,
   MatDatepickerModule,
   MatNativeDateModule,
   MatProgressBarModule,
@@ -71,7 +70,6 @@ const matImports = [
 const coreModules = [
   BrowserAnimationsModule,
   RouterModule,
-  FormsModule,
   ReactiveFormsModule,
   HttpClientModule,
 ];
@@ -80,12 +78,15 @@ const coreModules = [
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
     ...matImports,
+    MatSelectModule,
+    MatTooltipModule,
     ...coreModules,
+    FormsModule,
     AppRoutingModule,
     BrowserModule,
     CommonModule,
   ],
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, QuizComponent],
   providers: [
     //Mat tooltip global config
     {

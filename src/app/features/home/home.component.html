@@ -7,6 +7,7 @@
       class="select w-40 h-10 border border-color-gray-400 rounded"
       aria-label="Select a category"
       name="category"
+      [(ngModel)]="selectedCategory"
     >
       <option disabled selected>Select a category</option>
       <option *ngFor="let category of triviaCategories" [value]="category">
@@ -18,19 +19,22 @@
       #difficultySelect
       class="select w-40 h-10 border border-color-gray-400 rounded"
       name="difficulty"
-      aria-placeholder="Select Difficulty"
-      placeholder="Select Difficulty"
+      aria-label="Select Difficulty"
+      [(ngModel)]="selectedDifficulty"
     >
       <option disabled selected>Select difficulty</option>
       <option
+        class="capitalize"
         *ngFor="let difficulty of difficultyLevels"
         [value]="difficulty"
-      ></option>
+      >
+        {{ difficulty }}
+      </option>
     </select>
     <button
       #createBtn
       mat-button
-      class="button px-4 h-10 bg-color-gray-lighter hover:bg-blue-400"
+      class="button px-4 h-10 bg-gray-100 hover:bg-blue-400"
       type="button"
       (click)="createTriviaQuestions()"
     >

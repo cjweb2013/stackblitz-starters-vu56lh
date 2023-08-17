@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     { id: 3, title: 'Hard' },
   ];
   isLoading = false;
-  selectedCategory: TriviaCategory | undefined = undefined;
+  selectedCategory: TriviaCategory = { id: 0, name: '' };
   selectedDifficulty?: TriviaDifficulty;
   triviaCategories: TriviaCategory[] = [];
 
@@ -36,9 +36,9 @@ export class HomeComponent implements OnInit {
     this.triviaService
       .getTriviaCategories()
       .subscribe({
-        next: (categories) => {
-          this.triviaCategories = categories;
-          console.log(categories);
+        next: (results) => {
+          this.triviaCategories = results.trivia_categories;
+          console.log(results.trivia_categories);
         },
         error: () => {
           const message =

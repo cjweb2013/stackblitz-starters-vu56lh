@@ -1,8 +1,8 @@
 <section class="w-full flex flex-col items-center">
   <span class="text-2xl flex font-bold my-8">Quiz Maker</span>
   <div class="flex items-center">
-    <select
-    #categorySelect
+    <!-- <mat-select
+      #categorySelect
       class="select"
       name="category"
       [(ngModel)]="selectedCategory"
@@ -13,10 +13,27 @@
       >
         {{ category.name }}
       </option>
-    </select>
-    <select #difficultySelect name="difficulty" aria-placeholder="Select Difficulty" [(ngModel)]="selectedDifficulty" [disabled]="!selectedCategory">
-      <option *ngFor="let difficulty of difficultyLevels;" [value]=" difficulty"></option>
-    </select>
-    <button #createBtn mat-button class="button bg-color-gray-lighter" type="button" (click)="createTrivia()">Create</button>
+    </mat-select> -->
+    <!-- <select
+      #difficultySelect
+      name="difficulty"
+      aria-placeholder="Select Difficulty"
+      [(ngModel)]="selectedDifficulty"
+      [disabled]="!selectedCategory"
+    >
+      <option
+        *ngFor="let difficulty of difficultyLevels"
+        [value]="difficulty"
+      ></option>
+    </select> -->
+    <button
+      #createBtn
+      mat-button
+      class="button bg-color-gray-lighter"
+      type="button"
+      (click)="createTrivia()"
+    >
+      Create
+    </button>
   </div>
 </section>

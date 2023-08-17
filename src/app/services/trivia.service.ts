@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { TriviaCategory } from '../models/trivia.model';
+import { TriviaCategoryContainer } from '../models/trivia.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +9,8 @@ import { TriviaCategory } from '../models/trivia.model';
 export class TriviaService {
   constructor(private http: HttpClient) {}
 
-  getTriviaCategories(): Observable<TriviaCategory[]> {
-    return this.http.get<TriviaCategory[]>(
+  getTriviaCategories(): Observable<TriviaCategoryContainer> {
+    return this.http.get<TriviaCategoryContainer>(
       'https://opentdb.com/api_category.php'
     );
   }

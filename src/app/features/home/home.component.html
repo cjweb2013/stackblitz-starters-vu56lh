@@ -1,14 +1,21 @@
 <section class="w-full flex flex-col items-center">
   <span class="text-2xl flex font-bold my-8">Quiz Maker</span>
-  <!-- <form [formGroup]="selectionForm" (ngSubmit)="(onSubmit)">
-    <select class="select" formControlName="1">
+  <div class="flex items-center">
+    <select
+    #categorySelect
+      class="select"
+      name="category"
+      [(ngModel)]="selectedCategory"
+    >
       <option
         *ngFor="let category of triviaCategories; index = index"
-        [value]="category.id"
-        [formControlName]="category"
+        [value]="category"
       >
         {{ category.name }}
       </option>
     </select>
-  </form> -->
+    <select #difficultySelect name="difficulty" aria-placeholder="Select Difficulty" [disabled]="!selectedCategory">
+      <option *ngFor="let difficulty"
+    <button #createBtn mat-button class="button bg-color-gray-lighter" type="button" (click)="createTrivia()">Create</button>
+  </div>
 </section>

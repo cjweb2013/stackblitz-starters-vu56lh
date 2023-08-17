@@ -5,7 +5,17 @@ export interface TriviaCategory {
   id?: number;
   name?: string;
 }
-export interface TriviaDifficulty {
-  id?: number;
-  title?: string;
+
+export interface TriviaResults {
+  response_code: number;
+  results: TriviaQuestion[];
+}
+
+export interface TriviaQuestion {
+  category: string;
+  type: string;
+  difficulty: string;
+  question: string;
+  correct_answer: string;
+  incorrect_answers: string[];
 }

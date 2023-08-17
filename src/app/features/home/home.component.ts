@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastClassEnum } from '../../enums/snackbar.enum';
-import { TriviaDifficulty, TriviaCategory } from '../../models/trivia.model';
+import { TriviaCategory, TriviaResults } from '../../models/trivia.model';
 import { SnackbarService } from '../../services/snackbar.service';
 import { TriviaService } from '../../services/trivia.service';
 
@@ -11,24 +11,48 @@ import { TriviaService } from '../../services/trivia.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  dificultyLevels: TriviaDifficulty[] = [
-    { id: 1, title: 'Easy' },
-    { id: 2, title: 'Medium' },
-    { id: 3, title: 'Hard' },
+  difficultyLevels: string[] = [
+    'easy',
+    'medium',
+    'hard'
   ];
   isLoading = false;
   selectedCategory: TriviaCategory = { id: 0, name: '' };
-  selectedDifficulty?: TriviaDifficulty;
+  selectedDifficulty?: string;
   triviaCategories: TriviaCategory[] = [];
+  triviaResults?: TriviaResults;
 
   constructor(
     private fb: FormBuilder,
     private snackbarService: SnackbarService,
     private triviaService: TriviaService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.getTrivia();
+  }
+  
+  createTriviaQuestions(): void {
+    if (this.selectedDifficulty && this.selectedCategory.id) {
+      this.isLoading = true;
+      let message = '',
+      toastClass = ToastClassEnum.default;
+      this.triviaService.getTriviaQuestions(10, this.selectedCategory?.id, this.selectedDifficulty)
+        .subscribe({
+          next: results => {
+            this.triviaResults = results;
+            message = 'Quiz generated successfully!';
+            toastClass = ToastClassEnum.success;
+          }, error: err => {
+            console.log('Error', err)
+            message = 'There was an error retrieving your questions. Please try again.';
+            toastClass = ToastClassEnum.warning;
+          }
+        }).add(() => {
+          this.isLoading = false
+          this.snackbarService.openSnackbar(message, toastClass);
+        })
+    }
   }
 
   getTrivia(): void {
@@ -49,8 +73,8 @@ export class HomeComponent implements OnInit {
       })
       .add(() => (this.isLoading = false));
   }
-  createTrivia(): void {}
-  setCategory(category: TriviaCategory): void {
-    this.selectedCategory = category;
-  }
+
+  // setCategory(category: TriviaCategory): void {
+  //   this.selectedCategory = category;
+  // }
 }

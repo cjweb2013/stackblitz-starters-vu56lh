@@ -1,41 +1,34 @@
 <section class="w-full flex flex-col items-center">
   <span class="text-2xl flex font-bold my-8">Quiz Maker</span>
-  <div class="flex items-center">
+  <div class="flex items-center gap-x-8">
     <select
-      mat-select
-      #categorySelect
-      class="select w-40 h-10 border border-color-gray-400"
-      aria-label="Select a category"
-      name="category"
-    >
+            mat-select
+            #categorySelect
+            class="select w-40 h-10 border border-color-gray-400"
+            aria-label="Select a category"
+            name="category">
       <option disabled selected>Select a category</option>
-      <ng-template *ngFor="let category of triviaCategories">
-        <option [value]="category">
-          {{ category.name }}
-        </option>
-      </ng-template>
+      <option *ngFor="let category of triviaCategories" [value]="category">
+        {{ category.name }}
+      </option>
     </select>
-    <!-- <select
-      #difficultySelect
-      name="difficulty"
-      aria-placeholder="Select Difficulty"
-      [(ngModel)]="selectedDifficulty"
-      [disabled]="!selectedCategory"
-    >
+    <select mat-select
+            #difficultySelect
+            name="difficulty"
+            aria-placeholder="Select Difficulty"
+            placeholder="Select Difficulty"
+            [disabled]="!selectedCategory.id">
       <option
-        *ngFor="let difficulty of difficultyLevels"
-        [value]="difficulty"
-      ></option>
-    </select> -->
+              *ngFor="let difficulty of difficultyLevels"
+              [value]="difficulty"></option>
+    </select>
     <button
-      #createBtn
-      mat-button
-      class="button bg-color-gray-lighter"
-      type="button"
-      (click)="createTrivia()"
-    >
+            #createBtn
+            mat-button
+            class="button bg-color-gray-lighter"
+            type="button"
+            (click)="createTriviaQuestions()">
       Create
     </button>
   </div>
 </section>
-<span *ngFor="let option of triviaCategories">{{ option }}</span>

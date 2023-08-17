@@ -1,19 +1,20 @@
 <section class="w-full flex flex-col items-center">
   <span class="text-2xl flex font-bold my-8">Quiz Maker</span>
   <div class="flex items-center">
-    <!-- <mat-select
+    <select
+      mat-select
       #categorySelect
-      class="select"
+      class="select w-40 h-10 border border-color-gray-400"
+      aria-label="Select a category"
       name="category"
-      [(ngModel)]="selectedCategory"
     >
-      <option
-        *ngFor="let category of triviaCategories; index = index"
-        [value]="category"
-      >
-        {{ category.name }}
-      </option>
-    </mat-select> -->
+      <option disabled selected>Select a category</option>
+      <ng-template *ngFor="let category of triviaCategories">
+        <option [value]="category">
+          {{ category.name }}
+        </option>
+      </ng-template>
+    </select>
     <!-- <select
       #difficultySelect
       name="difficulty"
@@ -37,3 +38,4 @@
     </button>
   </div>
 </section>
+<span *ngFor="let option of triviaCategories">{{ option }}</span>

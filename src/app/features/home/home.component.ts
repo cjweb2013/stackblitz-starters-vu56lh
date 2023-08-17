@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (results) => {
           this.triviaCategories = results.trivia_categories;
-          console.log(results.trivia_categories);
+          console.log(this.triviaCategories);
         },
         error: () => {
           const message =
@@ -50,4 +50,7 @@ export class HomeComponent implements OnInit {
       .add(() => (this.isLoading = false));
   }
   createTrivia(): void {}
+  setCategory(category: TriviaCategory): void {
+    this.selectedCategory = category;
+  }
 }

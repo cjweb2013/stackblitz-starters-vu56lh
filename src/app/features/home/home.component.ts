@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { ToastClassEnum } from '../../enums/snackbar.enum';
-import { TriviaCategory, TriviaResults } from '../../models/trivia.model';
+import { TriviaCategory, TriviaQuestion } from '../../models/trivia.model';
 import { SnackbarService } from '../../services/snackbar.service';
 import { TriviaService } from '../../services/trivia.service';
 
@@ -13,60 +13,35 @@ import { TriviaService } from '../../services/trivia.service';
 export class HomeComponent implements OnInit {
   difficultyLevels: string[] = ['easy', 'medium', 'hard'];
   isLoading = false;
-  selectedCategory?: TriviaCategory;
+  selectedCategory?: number;
   selectedDifficulty?: string;
   triviaCategories: TriviaCategory[] = [];
-  triviaResults?: TriviaResults;
+  triviaQuestions?: TriviaQuestion[] = [];
 
   constructor(
-    private fb: FormBuilder,
     private snackbarService: SnackbarService,
     private triviaService: TriviaService
   ) {}
 
   ngOnInit() {
     this.getTrivia();
-    let message = '';
-    let toastClass = ToastClassEnum.default;
-    this.triviaService
-      .getTriviaQuestions(10, 19, 'easy')
-      .subscribe({
-        next: (results) => {
-          this.triviaResults = results;
-          message = 'Quiz generated successfully!';
-          toastClass = ToastClassEnum.success;
-          console.log(results);
-        },
-        error: (err) => {
-          console.log('Error', err);
-          message =
-            'There was an error retrieving your questions. Please try again.';
-          toastClass = ToastClassEnum.warning;
-        },
-      })
-      .add(() => {
-        this.isLoading = false;
-        this.snackbarService.openSnackbar(message, toastClass);
-      });
   }
 
   createTriviaQuestions(): void {
-    if (this.selectedDifficulty && this.selectedCategory?.id) {
+    console.log(this.selectedCategory);
+    console.log(this.selectedDifficulty);
+    if (this.selectedDifficulty && this.selectedCategory) {
       this.isLoading = true;
       let message = '',
         toastClass = ToastClassEnum.default;
       this.triviaService
-        .getTriviaQuestions(
-          10,
-          this.selectedCategory?.id,
-          this.selectedDifficulty
-        )
+        .getTriviaQuestions(10, this.selectedCategory, this.selectedDifficulty)
         .subscribe({
-          next: (results) => {
-            this.triviaResults = results;
+          next: (response) => {
+            this.triviaQuestions = response.results;
             message = 'Quiz generated successfully!';
             toastClass = ToastClassEnum.success;
-            console.log(results);
+            console.log(this.triviaQuestions);
           },
           error: (err) => {
             console.log('Error', err);
@@ -100,6 +75,9 @@ export class HomeComponent implements OnInit {
       .add(() => (this.isLoading = false));
   }
 
+  logChange(change: number | string | undefined): void {
+    console.log(change);
+  }
   // setCategory(category: TriviaCategory): void {
   //   this.selectedCategory = category;
   // }

@@ -2,27 +2,36 @@
   <span class="text-2xl flex font-bold my-8">Quiz Maker</span>
   <div class="flex items-center gap-x-8">
     <select
-      mat-select
       #categorySelect
-      class="select w-40 h-10 border border-color-gray-400 rounded"
+      class="select w-40 h-10 px-4 border border-color-gray-400 rounded"
       aria-label="Select a category"
       name="category"
       [(ngModel)]="selectedCategory"
+      (ngModelChange)="logChange(selectedCategory)"
     >
-      <option disabled selected>Select a category</option>
-      <option *ngFor="let category of triviaCategories" [value]="category">
+      <option disabled selected value="">Select a category</option>
+      <option *ngFor="let category of triviaCategories" [value]="category.id">
         {{ category.name }}
       </option>
     </select>
     <select
       mat-select
       #difficultySelect
-      class="select w-40 h-10 border border-color-gray-400 rounded"
+      class="
+        select
+        w-40
+        h-10
+        px-4
+        border border-color-gray-400
+        rounded
+        capitalize
+      "
       name="difficulty"
       aria-label="Select Difficulty"
       [(ngModel)]="selectedDifficulty"
+      (ngModelChange)="logChange(selectedDifficulty)"
     >
-      <option selected>Select difficulty</option>
+      <option disabled selected value="">Select difficulty</option>
       <option
         class="capitalize"
         *ngFor="let difficulty of difficultyLevels"
@@ -31,20 +40,32 @@
         {{ difficulty }}
       </option>
     </select>
-    <button
-      #createBtn
-      mat-button
-      class="button px-4 h-10 bg-gray-100 hover:bg-blue-400"
-      type="button"
-      (click)="createTriviaQuestions()"
-    >
-      Create
-    </button>
+    <ng-container *ngIf="selectedCategory && selectedDifficulty">
+      <button
+        #createBtn
+        class="
+          button
+          px-4
+          h-10
+          bg-blue-100
+          rounded
+          transition transition-colors
+          hover:bg-blue-400
+        "
+        type="button"
+        (click)="createTriviaQuestions()"
+      >
+        Create
+      </button>
+    </ng-container>
   </div>
 </section>
 <section class="h-full w-full m-4 flex items-center">
   <div class="flex flex-col w-4/5 min-w-600">
-    <app-quiz [categoryId]="selectedCategory.id" [difficulty]="selectedDifficulty" [questions]="triviaResults?.results"></app-quiz>
-
+    <app-quiz
+      [categoryId]="selectedCategory"
+      [difficulty]="selectedDifficulty"
+      [questions]="triviaQuestions"
+    ></app-quiz>
   </div>
 </section>

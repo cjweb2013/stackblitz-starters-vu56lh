@@ -1,34 +1,55 @@
-<section class="flex items-center text-center w-4/5 min-w-600">
-  quiz results
-  <ng-container *ngFor="let question of questions; let index = index">
-    <div class="pb-4" [innerHtml]="question.question"></div>
-    <div class="flex gap-x-4 mb-8">
-      <span
-        class="
-          button
-          flex
-          items-center
-          justify-center
-          border border-gray-200
-          rounded
-          px-4
-        "
-        [ngClass]="{
-          'bg-green-400 text-white': option === question.correct_answer,
-          'bg-red-400':
-            option === question.choice &&
-            question.choice !== question.correct_answer
-        }"
-        *ngFor="let option of question.options"
-        [innerHtml]="option"
-      ></span>
+<section class="flex flex-col w-4/5 min-w-600 mx-auto">
+  <div class="text-center text-2xl my-8">Quiz Results</div>
+  <div class="flex flex-col gap-y-2">
+    <ng-container *ngFor="let question of questions; let index = index">
+      <div class="pb-4 text-sm" [innerHtml]="question.question"></div>
+      <div class="flex gap-x-4 mb-8">
+        <span
+          class="
+            button
+            flex
+            items-center
+            justify-center
+            border border-gray-200
+            rounded
+            px-4
+          "
+          [ngClass]="{
+            'bg-green-400 text-white': option === question.correct_answer,
+            'bg-red-400':
+              option === question.choice &&
+              question.choice !== question.correct_answer
+          }"
+          *ngFor="let option of question.options"
+          [innerHtml]="option"
+        ></span>
+      </div>
+    </ng-container>
+    <div
+      class="flex text-center items-center justify-center h-8"
+      [ngClass]="{
+        'bg-red-500': correctAnswersCount <= 1,
+        'bg-yellow': correctAnswersCount > 1 && correctAnswersCount < 3,
+        'bg-green-500 text-white': correctAnswersCount >= 3
+      }"
+    >
+      You scored {{ correctAnswersCount }} out of {{ questions.length }}
     </div>
-  </ng-container>
-  <button
-    type="button"
-    class="button px-8 rounded transition-colors bg-blue-100 hover:bg-blue-400"
-    (click)="reset()"
-  >
-    Create a new quiz
-  </button>
+    <button
+      type="button"
+      class="
+        button
+        px-8
+        h-12
+        mb-6
+        rounded
+        transition-colors
+        bg-blue-100
+        hover:bg-blue-400
+      "
+      (click)="reset()"
+    >
+      Create a new quiz
+    </button>
+  </div>
 </section>

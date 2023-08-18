@@ -24,4 +24,11 @@ export class QuizResultsComponent implements OnInit {
     });
     console.log(this.correctAnswersCount);
   }
+
+  reset(): void {
+    this.questions = [];
+
+    // localStorage.setItem('questions', JSON.stringify(this.questions));
+    // this.router.navigate(['QuizResults']);
+  }
 }

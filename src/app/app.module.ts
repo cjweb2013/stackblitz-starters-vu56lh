@@ -44,6 +44,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './features/home/home.component';
 import { QuizComponent } from './features/quiz/quiz.component';
+import { QuizResultsComponent } from './features/quiz-results/quiz-results.component';
 
 const matImports = [
   MatChipsModule,
@@ -86,7 +87,12 @@ const coreModules = [
     BrowserModule,
     CommonModule,
   ],
-  declarations: [AppComponent, HomeComponent, QuizComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    QuizComponent,
+    QuizResultsComponent,
+  ],
   providers: [
     //Mat tooltip global config
     {

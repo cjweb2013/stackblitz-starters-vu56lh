@@ -1,5 +1,6 @@
 <p>quiz works!</p>
 
-<ng-container *ngFor="let question of questions; let index=index">
-  <div>test</div>
+<ng-container *ngFor="let question of questions; let index = index">
+  <div class="pb-4" [innerHtml]="question.question"></div>
+  <div></div>
 </ng-container>

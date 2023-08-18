@@ -12,9 +12,10 @@ export class QuizResultsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(
-      localStorage.getItem('questions') as unknown as TriviaQuestion[]
-    );
+    this.questions = localStorage.getItem(
+      'questions'
+    ) as unknown as TriviaQuestion[];
+    console.log(this.questions);
   }
 
   evaluateAnswers(): void {

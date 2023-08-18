@@ -27,7 +27,6 @@ export class QuizComponent implements OnInit {
   /** Take the questions array and build options for answers */
   buildForm(): void {
     if (this.questions) {
-      console.log(this.questions);
       this.questions.forEach((q, index) => {
         // create an answers array matching the length and indexes of questions array
         // to be populated with each selection
@@ -66,7 +65,6 @@ export class QuizComponent implements OnInit {
     if (this.answers?.length) {
       this.answers[index] = option;
       this.quizForm.controls;
-      console.log(this.quizForm.controls);
       if (this.verifyCompleted()) this.isCompleted = true;
     }
   }

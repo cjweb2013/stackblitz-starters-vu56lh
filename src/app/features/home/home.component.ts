@@ -28,8 +28,6 @@ export class HomeComponent implements OnInit {
   }
 
   createTriviaQuestions(): void {
-    console.log(this.selectedCategory);
-    console.log(this.selectedDifficulty);
     if (this.selectedDifficulty && this.selectedCategory) {
       this.isLoading = true;
       let message = '',
@@ -63,7 +61,6 @@ export class HomeComponent implements OnInit {
       .subscribe({
         next: (results) => {
           this.triviaCategories = results.trivia_categories;
-          console.log(this.triviaCategories);
         },
         error: () => {
           const message =
@@ -72,13 +69,5 @@ export class HomeComponent implements OnInit {
         },
       })
       .add(() => (this.isLoading = false));
-  }
-
-  logChange(change: number | string | undefined): void {
-    console.log(change);
-  }
-
-  quizEvaluatedEvent(numberCorrect: number): void {
-    this.numberCorrect = numberCorrect;
   }
 }

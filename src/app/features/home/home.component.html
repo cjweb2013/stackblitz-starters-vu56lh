@@ -7,7 +7,6 @@
       aria-label="Select a category"
       name="category"
       [(ngModel)]="selectedCategory"
-      (ngModelChange)="logChange(selectedCategory)"
     >
       <option disabled selected value="0">Select a category</option>
       <option *ngFor="let category of triviaCategories" [value]="category.id">
@@ -29,7 +28,6 @@
       name="difficulty"
       aria-label="Select Difficulty"
       [(ngModel)]="selectedDifficulty"
-      (ngModelChange)="logChange(selectedDifficulty)"
     >
       <option disabled selected value="">Select difficulty</option>
       <option
@@ -65,34 +63,11 @@
   *ngIf="triviaQuestions?.length"
 >
   <div class="flex flex-col w-4/5 min-w-600">
-    <div
-      class="text-2xl"
-      *ngIf="this.numberCorrect !== null && this.numberCorrect !== undefined"
-    >
-      Results
-    </div>
     <app-quiz
       [categoryId]="selectedCategory"
       [difficulty]="selectedDifficulty"
       [questions]="triviaQuestions"
       (quizEvaluated)="quizEvaluatedEvent($event)"
     ></app-quiz>
-    <div
-      class="w-full h-10 text-center flex flex-col"
-      *ngIf="this.numberCorrect !== null && this.numberCorrect !== undefined"
-    >
-      <span
-        [ngClass]="{
-          'bg-red-500': numberCorrect <= 1,
-          'bg-yellow-400': numberCorrect > 1 && numberCorrect < 3,
-          'bg-green-500 text-white': numberCorrect > 2
-        }"
-      >
-        You scored {{ this.numberCorrect }} out of 5</span
-      >
-      <button type="button" class="w-full" (click)="createTriviaQuestions()">
-        create a new Quiz
-      </button>
-    </div>
   </div>
 </section>

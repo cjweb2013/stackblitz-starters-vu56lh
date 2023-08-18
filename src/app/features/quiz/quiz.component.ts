@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MathHelper } from '../../helpers/math.helper';
 import { TriviaQuestion } from '../../models/trivia.model';
 
@@ -10,15 +11,13 @@ import { TriviaQuestion } from '../../models/trivia.model';
 export class QuizComponent implements OnInit {
   @Input() categoryId?: number;
   @Input() difficulty?: string;
-  @Input() questions?: TriviaQuestion[];  
-  @Output() quizEvaluated: EventEmitter<number> = new EventEmitter<number>();
+  @Input() questions?: TriviaQuestion[];
   answers: string[] = [];
-  correctAnswers = 0;
   isEvaluated = false;
   isCompleted = false;
   quizForm = this.fb.nonNullable.group({});
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
     console.log(this.questions);
@@ -57,12 +56,9 @@ export class QuizComponent implements OnInit {
     return !unanswered.length;
   }
 
-  evaluateAnswers(): void {
-    this.questions?.forEach((q, index) => {
-      if (this.answers[index] === q.correct_answer) this.correctAnswers++;
-    });
-    console.log(this.correctAnswers);
-    this.quizEvaluated.emit(this.correctAnswers);
+  navigateToResults(): void {
+    localStorage.setItem('questions', JSON.stringify(this.questions));
+    this.router.navigate(['QuizResults']);
   }
 
   /**Set the selected answer into the answers array at indexed position */

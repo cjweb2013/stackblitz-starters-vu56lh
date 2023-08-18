@@ -1,8 +1,38 @@
-<p>quiz works!</p>
-
-<ng-container *ngFor="let question of questions; let index = index">
-  <div class="pb-4" [innerHtml]="question.question"></div>
-  <div class="flex gap-x-4">
-    <span *ngFor="let option of question.options" [innerHtml]="option" (click)="selectOption(option,index)"></span>
-  </div>
-</ng-container>
+<form [formGroup]="quizForm">
+  <ng-container *ngFor="let question of questions; let index = index">
+    <div class="pb-4" [innerHtml]="question.question"></div>
+    <mat-radio-group
+      class="flex gap-x-4 mb-8"
+      [formControlName]="'question' + index"
+    >
+      <mat-radio-button
+        class="
+          button
+          flex
+          items-center
+          justify-center
+          cursor-pointer
+          border border-gray-200
+          rounded
+          px-4
+        "
+        [appHighlightAnswer]="question"
+        [ngClass]="{ 'bg-green-300': answers[index] === option }"
+        *ngFor="let option of question.options"
+        [innerHtml]="option"
+        [value]="option"
+        [ngValue]="option"
+        (click)="selectOption(option, index); question.choice = option"
+      ></mat-radio-button>
+    </mat-radio-group>
+  </ng-container>
+  <button
+    *ngIf="isCompleted"
+    mat-button
+    type="button"
+    class="button px-8 rounded transition-colors bg-blue-100 hover:bg-blue-400"
+    (click)="evaluateAnswers()"
+  >
+    Submit Quiz
+  </button>
+</form>

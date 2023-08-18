@@ -8,7 +8,6 @@ import { TriviaService } from '../../services/trivia.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   difficultyLevels: string[] = ['easy', 'medium', 'hard'];
@@ -41,7 +40,6 @@ export class HomeComponent implements OnInit {
             this.triviaQuestions = response.results;
             message = 'Quiz generated successfully!';
             toastClass = ToastClassEnum.success;
-            console.log(this.triviaQuestions);
           },
           error: (err) => {
             console.log('Error', err);
@@ -78,7 +76,4 @@ export class HomeComponent implements OnInit {
   logChange(change: number | string | undefined): void {
     console.log(change);
   }
-  // setCategory(category: TriviaCategory): void {
-  //   this.selectedCategory = category;
-  // }
 }

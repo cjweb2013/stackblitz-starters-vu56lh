@@ -54,7 +54,6 @@ const matImports = [
   MatIconModule,
   MatInputModule,
   MatMenuModule,
-  MatRadioModule,
   MatSidenavModule,
   MatSliderModule,
   MatSlideToggleModule,
@@ -78,6 +77,7 @@ const coreModules = [
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   imports: [
     ...matImports,
+    MatRadioModule,
     MatSelectModule,
     MatTooltipModule,
     ...coreModules,

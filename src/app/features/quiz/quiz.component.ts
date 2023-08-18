@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MathHelper } from '../../helpers/math.helper';
 import { TriviaQuestion } from '../../models/trivia.model';
 
 @Component({
@@ -10,9 +11,13 @@ export class QuizComponent implements OnInit {
   @Input() categoryId?: number;
   @Input() difficulty?: string;
   @Input() questions?: TriviaQuestion[];
-  answers?: string[];
+  answers: string[] = [];
+  correctAnswers = 0;
+  isEvaluated = false;
+  isCompleted = false;
+  quizForm = this.fb.nonNullable.group({});
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     console.log(this.questions);
@@ -22,34 +27,49 @@ export class QuizComponent implements OnInit {
   /** Take the questions array and build options for answers */
   buildForm(): void {
     if (this.questions) {
-      console.log(this.questions)
-      this.questions.forEach(q => {
+      console.log(this.questions);
+      this.questions.forEach((q, index) => {
         // create an answers array matching the length and indexes of questions array
         // to be populated with each selection
-        this.answers?.push('');
+        this.answers.push('');
         // combine correct answer at random position to incorrect_answers array to create options
-        const randomIndex = this.generateRandomInt(q.incorrect_answers.length);
-        q.options = q.incorrect_answers.splice(randomIndex, 0, q.correct_answer);
-        console.log(q.correct_answer);
+        const randomIndex = MathHelper.generateRandomInt(
+          q.incorrect_answers.length
+        );
+        let options = q.incorrect_answers;
+        options.splice(randomIndex, 0, q.correct_answer);
+        q.options = options;
+
+        this.quizForm.addControl(
+          `question${index}`,
+          new FormControl(q.options, Validators.required)
+        );
       });
-      console.log('new questions', this.questions)
     }
   }
 
-  /**generate a random index position for the insertion of the correct answer */
-  generateRandomInt(arrayLength: number): number {
-    return Math.floor(Math.random() * (arrayLength + 1));
+  verifyCompleted(): boolean {
+    let unanswered: string[] = [];
+    this.answers.forEach((a) => {
+      if (a === '') unanswered.push(a);
+    });
+    return !unanswered.length;
   }
 
-
-  evaluateQuiz(): void {
-
+  evaluateAnswers(): void {
+    this.questions?.forEach((q, index) => {
+      if (this.answers[index] === q.correct_answer) this.correctAnswers++;
+    });
+    console.log(this.correctAnswers);
   }
 
   /**Set the selected answer into the answers array at indexed position */
   selectOption(option: string, index: number): void {
     if (this.answers?.length) {
       this.answers[index] = option;
+      this.quizForm.controls;
+      console.log(this.quizForm.controls);
+      if (this.verifyCompleted()) this.isCompleted = true;
     }
   }
 }

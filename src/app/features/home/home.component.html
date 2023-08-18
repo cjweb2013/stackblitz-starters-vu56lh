@@ -60,7 +60,7 @@
     </ng-container>
   </div>
 </section>
-<section class="h-full w-full m-4 flex items-center">
+<section class="h-full w-full m-4 flex items-center" *ngIf="triviaQuestions?.length">
   <div class="flex flex-col w-4/5 min-w-600">
     <app-quiz
       [categoryId]="selectedCategory"

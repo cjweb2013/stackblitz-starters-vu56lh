@@ -19,4 +19,5 @@ export interface TriviaQuestion {
   correct_answer: string;
   incorrect_answers: string[];
   options?: string[];
+  choice?: string;
 }

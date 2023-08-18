@@ -18,6 +18,13 @@
         "
         [appHighlightAnswer]="question"
         [ngClass]="{ 'bg-green-300': answers[index] === option }"
+        [class]="
+          isEvaluated
+            ? question.choice === question.correct_answer
+              ? 'bg-green-400'
+              : 'bg-red-400'
+            : ''
+        "
         *ngFor="let option of question.options"
         [innerHtml]="option"
         [value]="option"
@@ -28,8 +35,8 @@
   </ng-container>
   <button
     *ngIf="isCompleted"
-    mat-button
     type="button"
+    [disabled]="isEvaluated"
     class="button px-8 rounded transition-colors bg-blue-100 hover:bg-blue-400"
     (click)="evaluateAnswers()"
   >

@@ -12,6 +12,7 @@ import { TriviaService } from '../../services/trivia.service';
 export class HomeComponent implements OnInit {
   difficultyLevels: string[] = ['easy', 'medium', 'hard'];
   isLoading = false;
+  numberCorrect?: number;
   selectedCategory?: number;
   selectedDifficulty?: string;
   triviaCategories: TriviaCategory[] = [];
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
       let message = '',
         toastClass = ToastClassEnum.default;
       this.triviaService
-        .getTriviaQuestions(10, this.selectedCategory, this.selectedDifficulty)
+        .getTriviaQuestions(5, this.selectedCategory, this.selectedDifficulty)
         .subscribe({
           next: (response) => {
             this.triviaQuestions = response.results;
@@ -75,5 +76,9 @@ export class HomeComponent implements OnInit {
 
   logChange(change: number | string | undefined): void {
     console.log(change);
+  }
+
+  quizEvaluatedEvent(numberCorrect: number): void {
+    this.numberCorrect = numberCorrect;
   }
 }

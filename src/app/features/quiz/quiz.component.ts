@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MathHelper } from '../../helpers/math.helper';
 import { TriviaQuestion } from '../../models/trivia.model';
@@ -10,7 +10,8 @@ import { TriviaQuestion } from '../../models/trivia.model';
 export class QuizComponent implements OnInit {
   @Input() categoryId?: number;
   @Input() difficulty?: string;
-  @Input() questions?: TriviaQuestion[];
+  @Input() questions?: TriviaQuestion[];  
+  @Output() quizEvaluated: EventEmitter<number> = new EventEmitter<number>();
   answers: string[] = [];
   correctAnswers = 0;
   isEvaluated = false;
@@ -61,6 +62,7 @@ export class QuizComponent implements OnInit {
       if (this.answers[index] === q.correct_answer) this.correctAnswers++;
     });
     console.log(this.correctAnswers);
+    this.quizEvaluated.emit(this.correctAnswers);
   }
 
   /**Set the selected answer into the answers array at indexed position */

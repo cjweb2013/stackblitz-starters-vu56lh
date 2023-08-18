@@ -13,8 +13,8 @@ export class HomeComponent implements OnInit {
   difficultyLevels: string[] = ['easy', 'medium', 'hard'];
   isLoading = false;
   numberCorrect?: number;
-  selectedCategory?: number;
-  selectedDifficulty?: string;
+  selectedCategory?: number = -1;
+  selectedDifficulty?: string = '';
   triviaCategories: TriviaCategory[] = [];
   triviaQuestions?: TriviaQuestion[] = [];
 

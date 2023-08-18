@@ -37,7 +37,17 @@
     *ngIf="isCompleted"
     type="button"
     [disabled]="isEvaluated"
-    class="button px-8 rounded transition-colors bg-blue-100 hover:bg-blue-400"
+    class="
+      button
+      w-full
+      px-8
+      h-10
+      my-6
+      rounded
+      transition-colors
+      bg-blue-100
+      hover:bg-blue-400
+    "
     (click)="navigateToResults()"
   >
     Submit Quiz

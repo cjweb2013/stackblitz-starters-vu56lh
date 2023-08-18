@@ -1,4 +1,6 @@
-<section class="flex flex-col w-4/5 min-w-600 mx-auto">
+<section
+  class="flex flex-col justify-center items-center w-4/5 min-w-600 mx-auto"
+>
   <div class="text-center text-2xl my-8">Quiz Results</div>
   <div class="flex flex-col gap-y-2">
     <ng-container *ngFor="let question of questions; let index = index">
@@ -29,8 +31,8 @@
       class="flex text-center items-center justify-center h-8"
       [ngClass]="{
         'bg-red-500': correctAnswersCount <= 1,
-        'bg-yellow': correctAnswersCount > 1 && correctAnswersCount < 3,
-        'bg-green-500 text-white': correctAnswersCount >= 3
+        'bg-yellow-400': correctAnswersCount > 1 && correctAnswersCount <= 3,
+        'bg-green-500 text-white': correctAnswersCount > 3
       }"
     >
       You scored {{ correctAnswersCount }} out of {{ questions.length }}
@@ -45,7 +47,7 @@
         rounded
         transition-colors
         bg-blue-100
-        hover:bg-blue-400
+        hover:bg-blue-500 hover:text-white
       "
       (click)="reset()"
     >

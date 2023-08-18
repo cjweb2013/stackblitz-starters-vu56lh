@@ -1,14 +1,16 @@
 <section class="w-full flex flex-col items-center">
   <span class="text-2xl flex font-bold my-8">Quiz Maker</span>
-  <div class="flex items-center gap-x-8">
+  <div class="flex items-center justify-center">
     <select
       #categorySelect
-      class="select w-40 h-10 px-4 border border-color-gray-400 rounded"
+      class="select w-2/5 h-10 px-4 border border-color-gray-400 rounded"
       aria-label="Select a category"
       name="category"
       [(ngModel)]="selectedCategory"
+      aria-placeholder="Select a category"
+      placeholder="Select a category"
     >
-      <option disabled selected value="0">Select a category</option>
+      <option disabled selected value="-1">Select a category</option>
       <option *ngFor="let category of triviaCategories" [value]="category.id">
         {{ category.name }}
       </option>
@@ -18,7 +20,7 @@
       #difficultySelect
       class="
         select
-        w-40
+        w-2/5
         h-10
         px-4
         border border-color-gray-400
@@ -48,7 +50,7 @@
           bg-blue-100
           rounded
           transition transition-colors
-          hover:bg-blue-400
+          hover:bg-blue-500 hover:text-white
         "
         type="button"
         (click)="createTriviaQuestions()"
@@ -62,7 +64,9 @@
   class="h-full w-full m-4 flex items-center"
   *ngIf="triviaQuestions?.length"
 >
-  <div class="flex flex-col w-4/5 min-w-600">
+  <div
+    class="flex flex-col justify-center items-center w-full mx-auto min-w-600"
+  >
     <app-quiz
       [categoryId]="selectedCategory"
       [difficulty]="selectedDifficulty"

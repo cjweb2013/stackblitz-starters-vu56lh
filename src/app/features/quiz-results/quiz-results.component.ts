@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TriviaQuestion } from '../../models/trivia.model';
 
 @Component({
@@ -9,26 +10,25 @@ export class QuizResultsComponent implements OnInit {
   correctAnswersCount: number = 0;
   questions: TriviaQuestion[] = [];
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    this.questions = JSON.parse(localStorage.getItem(
-      'questions'
-    )|| '[]') as unknown as TriviaQuestion[];
-    console.log(this.questions);
+    this.questions = JSON.parse(
+      localStorage.getItem('questions') || '[]'
+    ) as unknown as TriviaQuestion[];
+    this.evaluateAnswers();
   }
 
   evaluateAnswers(): void {
     this.questions?.forEach((q, index) => {
       if (q.choice === q.correct_answer) this.correctAnswersCount++;
     });
-    console.log(this.correctAnswersCount);
   }
 
   reset(): void {
     this.questions = [];
-
-    // localStorage.setItem('questions', JSON.stringify(this.questions));
-    // this.router.navigate(['QuizResults']);
+    this.correctAnswersCount = 0;
+    localStorage.removeItem('questions');
+    this.router.navigate(['Home']);
   }
 }

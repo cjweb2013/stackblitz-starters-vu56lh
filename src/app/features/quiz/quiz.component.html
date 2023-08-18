@@ -2,5 +2,7 @@
 
 <ng-container *ngFor="let question of questions; let index = index">
   <div class="pb-4" [innerHtml]="question.question"></div>
-  <div></div>
+  <div class="flex gap-x-4">
+    <span *ngFor="let option of question.options" [innerHtml]="option" (click)="selectOption(option,index)"></span>
+  </div>
 </ng-container>

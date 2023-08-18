@@ -20,7 +20,6 @@ export class QuizComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.questions);
     this.buildForm();
   }
 
@@ -47,6 +46,9 @@ export class QuizComponent implements OnInit {
     }
   }
 
+  /** after each answer, check to verify if each question has been answered
+   * @return if any questions unanswered return false, else true
+   */
   verifyCompleted(): boolean {
     let unanswered: string[] = [];
     this.answers.forEach((a) => {
@@ -55,12 +57,16 @@ export class QuizComponent implements OnInit {
     return !unanswered.length;
   }
 
+  /** after all questions answered, take questions and answers to the results page */
   navigateToResults(): void {
     localStorage.setItem('questions', JSON.stringify(this.questions));
     this.router.navigate(['QuizResults']);
   }
 
-  /**Set the selected answer into the answers array at indexed position */
+  /**Set the selected answer into the answers array at indexed position 
+   * @param option - selected option for a given question
+   * @param index - position in the question array so choices in answer[] match question
+  */
   selectOption(option: string, index: number): void {
     if (this.answers?.length) {
       this.answers[index] = option;

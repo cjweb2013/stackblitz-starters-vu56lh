@@ -104,17 +104,6 @@ const coreModules = [
         touchendHideDelay: 500,
       },
     },
-    //Mat dialog global config
-    {
-      provide: MAT_DIALOG_DEFAULT_OPTIONS,
-      useValue: {
-        minHeight: '26rem',
-        width: '64rem',
-        maxWidth: '90vw',
-        maxHeight: '90vh',
-        hasBackdrop: true,
-      },
-    },
     //Angular Snackbar global config
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,

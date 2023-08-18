@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ToastClassEnum } from '../../enums/snackbar.enum';
 import { TriviaCategory, TriviaQuestion } from '../../models/trivia.model';
 import { SnackbarService } from '../../services/snackbar.service';
@@ -27,6 +26,7 @@ export class HomeComponent implements OnInit {
     this.getTrivia();
   }
 
+  /** Build the trivia questions for the quiz. Display success or failure message after subscription */
   createTriviaQuestions(): void {
     if (this.selectedDifficulty && this.selectedCategory) {
       this.isLoading = true;
@@ -54,6 +54,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  /** Get categories from Trivia service to populate dropdown */
   getTrivia(): void {
     this.isLoading = true;
     this.triviaService
